@@ -23,7 +23,40 @@ The UCI file encodes the target as `-1 = phishing` and `1 = legitimate` (4,898 p
 The block below is written by `scripts/run_all.py` from the real dataset. Figures are in [`figures/`](figures) and every table behind them is in [`results/`](results).
 
 <!-- RESULTS:START -->
-*Run `python scripts/run_all.py` (or the Kaggle notebook) to fill this section.*
+Dataset: 11,055 rows, 5,206 exact duplicates removed, 5,849 unique rows and 30 features; phishing rate 51.62%. Label check: corr(SSLfinal_State, phishing) = -0.693. Positive class = phishing throughout.
+
+**Static study** (stratified 80/20 split, 5-fold CV on the training part)
+
+| Model | Accuracy | Precision | Recall | F1 | ROC-AUC | PR-AUC | CV F1 |
+|---|---|---|---|---|---|---|---|
+| **Random Forest** | 0.9419 | 0.9573 | 0.9288 | 0.9429 | 0.9853 | 0.9880 | 0.9490 |
+| Random Forest (tuned) | 0.9419 | 0.9605 | 0.9255 | 0.9427 | 0.9874 | 0.9896 | 0.9497 |
+| Soft-Voting Ensemble | 0.9376 | 0.9508 | 0.9272 | 0.9388 | 0.9870 | 0.9886 | 0.9422 |
+| Stacking Ensemble | 0.9376 | 0.9508 | 0.9272 | 0.9388 | 0.9877 | 0.9896 | 0.9488 |
+| SVM (RBF) | 0.9350 | 0.9430 | 0.9305 | 0.9367 | 0.9842 | 0.9844 | 0.9396 |
+| Logistic Regression | 0.9179 | 0.9247 | 0.9156 | 0.9201 | 0.9776 | 0.9797 | 0.9229 |
+| Decision Tree | 0.9128 | 0.9169 | 0.9139 | 0.9154 | 0.9178 | 0.8911 | 0.9221 |
+
+Tuned Random Forest: `{'max_depth': 20, 'min_samples_leaf': 1, 'n_estimators': 200}`. Top SHAP features: SSLfinal_State, URL_of_Anchor, having_Sub_Domain, Prefix_Suffix, web_traffic.
+
+**Drift study** (simulated shift, class prior held fixed)
+
+| Quantity | Value |
+|---|---|
+| Naive split phishing rate, old pool -> future | 56.64% -> 39.89% (label shift, diagnostic only) |
+| Balanced split phishing rate, old pool -> future | 51.61% -> 51.62% |
+| Train / validation / future records | 3,275.0 / 819.0 / 1,755.0 |
+| Features with a significant KS shift | 18 of 30 |
+| Accuracy, validation -> future | 92.92% -> 97.61% |
+| Phishing recall, validation -> future | 91.02% -> 96.03% |
+| Abstention threshold (locked on validation) | 0.91 |
+| Future coverage / selective accuracy | 81.60% / 99.79% |
+| Brier, validation -> future (calibrated) | 0.0542 -> 0.0228 |
+| ECE, validation -> future (calibrated) | 0.0237 -> 0.0291 |
+| Future Brier, uncalibrated -> calibrated | 0.0255 -> 0.0228 |
+| SHAP rank stability (Spearman) | 0.9564 |
+| Top-10 feature overlap (Jaccard) | 0.82 |
+| Direction flips in top-10 | 0 |
 <!-- RESULTS:END -->
 
 | | |

@@ -1,0 +1,251 @@
+{
+  "version": "1.0.0",
+  "data": {
+    "path": "C:\\Users\\ashik\\Downloads\\archive\\dataset.csv",
+    "raw_rows": 11055,
+    "label_column": "Result",
+    "raw_counts": {
+      "1": 6157,
+      "-1": 4898
+    },
+    "dropped_columns": [
+      "id"
+    ],
+    "duplicates_removed": 5206,
+    "conflicting_feature_vectors": 128,
+    "rows": 5849,
+    "n_features": 30,
+    "phishing_rate": 0.5161566079671739,
+    "ssl_label_correlation": -0.6932283679555558,
+    "notes": [
+      "128 rows share a feature vector with a row of the opposite label (irreducible noise); they are kept."
+    ]
+  },
+  "static": {
+    "best_model": "Random Forest",
+    "best_rf_params": {
+      "max_depth": 20,
+      "min_samples_leaf": 1,
+      "n_estimators": 200
+    },
+    "top_features_shap": [
+      "SSLfinal_State",
+      "URL_of_Anchor",
+      "having_Sub_Domain",
+      "Prefix_Suffix",
+      "web_traffic",
+      "Links_in_tags",
+      "SFH",
+      "Request_URL",
+      "having_IP_Address",
+      "Links_pointing_to_page"
+    ],
+    "top_features_permutation": [
+      "URL_of_Anchor",
+      "SSLfinal_State",
+      "Prefix_Suffix",
+      "web_traffic",
+      "SFH",
+      "Links_in_tags",
+      "having_Sub_Domain",
+      "Links_pointing_to_page",
+      "popUpWidnow",
+      "Submitting_to_email"
+    ]
+  },
+  "static_results": [
+    {
+      "Model": "Random Forest",
+      "CV F1": 0.949,
+      "Accuracy": 0.9419,
+      "Precision": 0.9573,
+      "Recall": 0.9288,
+      "F1": 0.9429,
+      "ROC-AUC": 0.9853,
+      "PR-AUC": 0.988
+    },
+    {
+      "Model": "Random Forest (tuned)",
+      "CV F1": 0.9497,
+      "Accuracy": 0.9419,
+      "Precision": 0.9605,
+      "Recall": 0.9255,
+      "F1": 0.9427,
+      "ROC-AUC": 0.9874,
+      "PR-AUC": 0.9896
+    },
+    {
+      "Model": "Soft-Voting Ensemble",
+      "CV F1": 0.9422,
+      "Accuracy": 0.9376,
+      "Precision": 0.9508,
+      "Recall": 0.9272,
+      "F1": 0.9388,
+      "ROC-AUC": 0.987,
+      "PR-AUC": 0.9886
+    },
+    {
+      "Model": "Stacking Ensemble",
+      "CV F1": 0.9488,
+      "Accuracy": 0.9376,
+      "Precision": 0.9508,
+      "Recall": 0.9272,
+      "F1": 0.9388,
+      "ROC-AUC": 0.9877,
+      "PR-AUC": 0.9896
+    },
+    {
+      "Model": "SVM (RBF)",
+      "CV F1": 0.9396,
+      "Accuracy": 0.935,
+      "Precision": 0.943,
+      "Recall": 0.9305,
+      "F1": 0.9367,
+      "ROC-AUC": 0.9842,
+      "PR-AUC": 0.9844
+    },
+    {
+      "Model": "Logistic Regression",
+      "CV F1": 0.9229,
+      "Accuracy": 0.9179,
+      "Precision": 0.9247,
+      "Recall": 0.9156,
+      "F1": 0.9201,
+      "ROC-AUC": 0.9776,
+      "PR-AUC": 0.9797
+    },
+    {
+      "Model": "Decision Tree",
+      "CV F1": 0.9221,
+      "Accuracy": 0.9128,
+      "Precision": 0.9169,
+      "Recall": 0.9139,
+      "F1": 0.9154,
+      "ROC-AUC": 0.9178,
+      "PR-AUC": 0.8911
+    }
+  ],
+  "drift": {
+    "discriminative_features": [
+      "SSLfinal_State",
+      "URL_of_Anchor",
+      "Prefix_Suffix",
+      "having_Sub_Domain",
+      "web_traffic",
+      "SFH",
+      "Links_in_tags",
+      "Request_URL",
+      "Domain_registeration_length",
+      "Google_Index"
+    ],
+    "naive_priors": {
+      "old_pool": 0.5664,
+      "train": 0.5664,
+      "validation": 0.5665,
+      "future": 0.3989,
+      "prior_shift_pts": -16.7578,
+      "n_train": 3275.0,
+      "n_val": 819.0,
+      "n_future": 1755.0
+    },
+    "balanced_priors": {
+      "old_pool": 0.5161,
+      "train": 0.516,
+      "validation": 0.5165,
+      "future": 0.5162,
+      "prior_shift_pts": 0.0118,
+      "n_train": 3275.0,
+      "n_val": 819.0,
+      "n_future": 1755.0
+    },
+    "ks_shifted": 18,
+    "ks_total": 30,
+    "threshold": 0.91,
+    "validation": {
+      "accuracy_all": 0.9292,
+      "coverage": 0.7546,
+      "abstention_rate": 0.2454,
+      "selective_accuracy": 0.9903,
+      "recall_phishing_all": 0.9102,
+      "recall_legitimate_all": 0.9495,
+      "recall_phishing_answered": 0.9907,
+      "recall_legitimate_answered": 0.9899
+    },
+    "future": {
+      "accuracy_all": 0.9761,
+      "coverage": 0.816,
+      "abstention_rate": 0.184,
+      "selective_accuracy": 0.9979,
+      "recall_phishing_all": 0.9603,
+      "recall_legitimate_all": 0.9929,
+      "recall_phishing_answered": 0.9958,
+      "recall_legitimate_answered": 1.0
+    },
+    "calibration": {
+      "uncalibrated_validation": {
+        "brier": 0.0546,
+        "log_loss": 0.1851,
+        "ece": 0.0363
+      },
+      "uncalibrated_future": {
+        "brier": 0.0255,
+        "log_loss": 0.1096,
+        "ece": 0.0531
+      },
+      "calibrated_validation": {
+        "brier": 0.0542,
+        "log_loss": 0.1772,
+        "ece": 0.0237
+      },
+      "calibrated_future": {
+        "brier": 0.0228,
+        "log_loss": 0.0857,
+        "ece": 0.0291
+      }
+    },
+    "confidence_bins_future": [
+      {
+        "bin": "[0.50, 0.60)",
+        "n": 52,
+        "share": 0.0296,
+        "accuracy": 0.7115
+      },
+      {
+        "bin": "[0.60, 0.70)",
+        "n": 41,
+        "share": 0.0234,
+        "accuracy": 0.7561
+      },
+      {
+        "bin": "[0.70, 0.80)",
+        "n": 77,
+        "share": 0.0439,
+        "accuracy": 0.8961
+      },
+      {
+        "bin": "[0.80, 0.90)",
+        "n": 116,
+        "share": 0.0661,
+        "accuracy": 0.9655
+      },
+      {
+        "bin": "[0.90, 0.95)",
+        "n": 130,
+        "share": 0.0741,
+        "accuracy": 0.9846
+      },
+      {
+        "bin": "[0.95, 1.00]",
+        "n": 1339,
+        "share": 0.763,
+        "accuracy": 0.9978
+      }
+    ],
+    "shap_stability": {
+      "spearman_rho": 0.9564,
+      "jaccard_at_10": 0.8182,
+      "sign_flips_in_top_k": 0,
+      "flipped_features": []
+    }
+  }
+}
