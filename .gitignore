@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
+# the dataset is not redistributed here - see data/README.md
+data/*
+!data/README.md
+models/
+*.joblib
+*.pkl
